@@ -59,7 +59,7 @@
                         <!-- Kiểm tra nếu đã đăng nhập thì hiển thị dropdown -->
                         <c:if test="${not empty sessionScope.user}">
                             <li class="dropdown">
-                                <a href="UserProfile.jsp">
+                                <a href="user_profile?userID=${sessionScope.user.userID}">
                                     <span>Xin Chào ${sessionScope.user.userName}</span> 
                                     <i class="bi bi-chevron-down toggle-dropdown"></i>
                                 </a>

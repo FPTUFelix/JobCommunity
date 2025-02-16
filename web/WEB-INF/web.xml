@@ -64,4 +64,8 @@
         <servlet-name>ChangeAvatarController</servlet-name>
         <url-pattern>/change_avatar</url-pattern>
     </servlet-mapping>
+    <session-config>
+        <session-timeout>20</session-timeout>  <!-- Đơn vị: phút -->
+    </session-config>
+
 </web-app>

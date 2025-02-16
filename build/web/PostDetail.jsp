@@ -80,8 +80,7 @@
                                     <div class="meta-top">
                                         <ul>
                                             <li class="d-flex align-items-center"><i class="bi bi-arrow-bar-right"></i>${PostDetail.startedDate}</li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <time datetime="2020-01-01">${PostDetail.timeDuration}</time></li>
-                                            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> Comments</li>
+                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <time datetime="2020-01-01">${PostDetail.timeDuration}</time></li> 
                                         </ul>
                                     </div><!-- End meta top -->
 
