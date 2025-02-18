@@ -173,6 +173,6 @@ public class DaoPost extends DBContext {
     public static void main(String[] args) {
         DaoPost dao = new DaoPost();
         List<Post> l = dao.getAllPost();
-        System.out.println(l.isEmpty());
+        System.out.println(dao.checkAvaliblePost(1));
     }
 }

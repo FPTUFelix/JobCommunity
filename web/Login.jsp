@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
+        <title>Đăng nhập</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta name="description" content="">
         <meta name="keywords" content="">
@@ -38,23 +38,25 @@
 
                             <form style="width: 23rem;" action="login">
 
-                                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+                                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Đăng nhập</h3>
 
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <input type="text" id="form2Example18" class="form-control form-control-lg" name="username" />
-                                    <label class="form-label" for="form2Example18">UserName</label>
+                                    <input type="text" id="form2Example18" class="form-control form-control-lg" name="username" placeholder="Tài Khoản" required/>
+                                    <label class="form-label" for="form2Example18">Tài Khoản</label>
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <input type="password" id="form2Example28" class="form-control form-control-lg" name="password"/>
-                                    <label class="form-label" for="form2Example28">Password</label>
+                                    <input type="password" id="form2Example28" class="form-control form-control-lg" name="password" placeholder="Mật Khẩu" required/>
+                                    <label class="form-label" for="form2Example28">Mật Khẩu</label>
                                 </div>
                                 <div class="pt-1 mb-4">
-                                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-block" type="submit">Login</button>
+                                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-block" type="submit">Đăng nhập</button>
                                 </div>
-                                <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-                                <p>Don't have an account? <a href="Register.jsp" class="link-info">Register here</a></p>
-
+                                <p class="small mb-5 pb-lg-2">${mess}</p>
+                                <p>Chưa có tài khoản? <a href="Register.jsp" class="link-info">Đăng ký</a></p>
+                                <div class="pt-1 mb-4">
+                                    <a class="btn btn-info btn-lg btn-block" href="home">Về Trang Chủ</a>
+                                </div>
                             </form>
                         </div>
 

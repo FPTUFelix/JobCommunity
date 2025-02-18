@@ -64,25 +64,98 @@
             <!-- Contact Section -->
             <section id="contact" class="contact section">
                 <div class="container" data-aos="fade">
-
                     <div class="row gy-5 gx-lg-5">
                         <div class="col-lg-12">
-                            <form action="create_new_post">
+                            <form action="create_new_post" method="post" enctype="multipart/form-data" class="form-group">
                                 <input type="hidden" name="userID" value="${sessionScope.user.userID}">
-                                <input type="text" name="content">
-                                <button type="submit">Đăng bài</button>
+
+                                <label for="title">Tiêu đề</label>
+                                <input type="text" id="title" name="Title" class="form-control" required>
+
+                                <label for="description">Mô tả</label>
+                                <textarea id="description" name="Description" class="form-control" rows="4" required></textarea>
+
+                                <label for="img" class="form-label">Chọn ảnh đại diện</label>
+                                <input type="file" class="form-control mt-2" id="img" name="img" 
+                                       accept="image/*" onchange="previewImage(event, 'img-preview')" required>
+
+                                <!-- Xem trước ảnh -->
+                                <div class="preview-container mt-3">
+                                    <img id="img-preview" src="" alt="Ảnh xem trước" style="max-width: 100%; display: none;">
+                                </div>
+
+
+                                <label for="dateStarted">Ngày bắt đầu</label>
+                                <input type="date" id="dateStarted" name="dateStarted" class="form-control" required>
+
+                                <label for="timeDuration">Thời gian làm việc</label>
+                                <input type="text" id="timeDuration" name="timeDuration" class="form-control" required>
+
+                                <label for="place">Địa điểm</label>
+                                <input type="text" id="place" name="place" class="form-control" required>
+
+                                <label for="salary">Mức lương</label>
+                                <input type="number" id="salary" name="salary" class="form-control" required>
+
+                                <label for="paymentTime">Thời gian thanh toán</label>
+                                <input type="text" id="paymentTime" name="paymentTime" class="form-control" required>
+
+                                <label for="requirement">Yêu cầu</label>
+                                <textarea id="requirement" name="requirement" class="form-control" rows="3" required></textarea>
+
+                                <button type="submit" class="btn btn-primary mt-3">Đăng bài</button>
                             </form>
                         </div>
                     </div>
-
                 </div>
+            </section>
+            <script>
+                function previewImage(input) {
+                    const preview = document.getElementById('img-preview-id');
 
-            </section><!-- /Contact Section -->
+                    // Kiểm tra xem có file được chọn hay không
+                    if (input.files && input.files[0]) {
+                        // Hiển thị preview của hình ảnh
+                        preview.src = window.URL.createObjectURL(input.files[0]);
+                        preview.style.display = "block"; // Hiển thị ảnh
+                    } else {
+                        preview.style.display = "none"; // Ẩn ảnh nếu không có file nào
+                    }
+                }
+                document.querySelectorAll('.size-btn').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        // Xóa class 'active' khỏi tất cả các nút
+                        document.querySelectorAll('.size-btn').forEach(function (btn) {
+                            btn.classList.remove('active');
+                        });
+                        // Thêm class 'active' vào nút được chọn
+                        button.classList.add('active');
+                        // Cập nhật giá trị của size vào input ẩn
+                        document.getElementById('size-input').value = button.getAttribute('data-size');
+                    });
+                });
+            </script>
+            <script>
+                function previewImage(event, previewId) {
+                    const input = event.target;
+                    const preview = document.getElementById(previewId);
 
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            preview.src = e.target.result;
+                            preview.style.display = "block"; // Hiển thị ảnh
+                        };
+                        reader.readAsDataURL(input.files[0]); // Đọc file ảnh
+                    } else {
+                        preview.src = "";
+                        preview.style.display = "none"; // Ẩn ảnh nếu không chọn file
+                    }
+                }
+
+            </script>
         </main>
 
         <%@include file="Footer.jsp" %>
-
     </body>
-
 </html>

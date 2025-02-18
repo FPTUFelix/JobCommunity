@@ -39,15 +39,13 @@ public class LoginController extends HttpServlet {
             DaoUser daoUser = new DaoUser();
             User u = daoUser.getUserName(userName); // Lấy user từ DB
             if (u.getUserName() == null || !u.getPassword().equals(password)) {
-                request.setAttribute("mess", "Sai Tk hoac MK");
+                request.setAttribute("mess", "Tài khoản hoặc mật khẩu chưa chính xác");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
                 return;
             }
             HttpSession session = request.getSession();
             session.setAttribute("user", u);
             request.getRequestDispatcher("home").forward(request, response);
-// Nếu đúng thông tin đăng nhập
-
         }
     }
 

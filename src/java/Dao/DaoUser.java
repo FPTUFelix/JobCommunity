@@ -147,12 +147,12 @@ public class DaoUser extends DBContext {
             ps.setString(1, userName);
             rs = ps.executeQuery();
             if (rs.next() == true) {
-                return true;
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
     public void register(String userName, String password,String email ,String fullName) {
@@ -174,6 +174,6 @@ public class DaoUser extends DBContext {
 
     public static void main(String[] args) {
         DaoUser d = new DaoUser();
-        d.register("a", "a", "a", "a");
+        System.out.println(d.checkUserName("user1"));
     }
 }
