@@ -78,6 +78,9 @@
                                         <a href="ChangeImageProfile.jsp" class="btn btn-primary btn-sm">Đổi Avatar</a>
                                     </div>
                                 </div>
+                                <c:if test="${User.userType == 2}">
+                                    <a href="IdentifyAccount.jsp" class="btn btn-primary btn-group">Xác thực tài khoản</a>
+                                </c:if>
                                 <p class="text-bg-danger">${mess}</p>
                             </div>
                         </div>
@@ -87,8 +90,14 @@
                                 <ul>
                                     <li><strong>Họ và Tên</strong> ${User.fullName}</li>
                                     <li><strong>Email</strong> ${User.email}</li>
-                                    <li><strong>Loại tài khoản</strong> ${User.userType}</li>
-                                    <li><strong>Trạng thái xác nhân</strong>${User.isVerified}</li>
+                                        <c:choose>
+                                            <c:when test="${User.userType == 1}">
+                                            <li><strong>Loại tài khoản:</strong> Đã xác thực</li>
+                                            </c:when>
+                                            <c:when test="${User.userType == 2}">
+                                            <li><strong>Loại tài khoản:</strong> Chưa xác thực</li>
+                                            </c:when>
+                                        </c:choose>
                                 </ul>
                             </div>
                         </div>

@@ -37,14 +37,10 @@ public class DaoUser extends DBContext {
                 String fullName = rs.getString(5);
                 String img = rs.getString(6);
                 String userType = rs.getString(7);
-                int numberFreePosts = rs.getInt(8);
-                int isVerifired = rs.getInt(9);
-                String CCCDFront = rs.getString(10);
-                String CCCDBack = rs.getString(11);
-                String CCCDStatus = rs.getString(12);
-                int status = rs.getInt(13);
-                Date createdDate = rs.getDate(14);
-                u = new User(userID, userNAme, password, email, fullName, img, userType, numberFreePosts, isVerifired, CCCDFront, CCCDBack, CCCDStatus, status, createdDate);
+                String CCCDFront = rs.getString(8);
+                String CCCDBack = rs.getString(9);
+                int status = rs.getInt(10);
+                u = new User(userID, userNAme, password, email, fullName, img, userType, CCCDFront, CCCDBack, status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,14 +65,10 @@ public class DaoUser extends DBContext {
                 String fullName = rs.getString(5);
                 String img = rs.getString(6);
                 String userType = rs.getString(7);
-                int numberFreePosts = rs.getInt(8);
-                int isVerifired = rs.getInt(9);
-                String CCCDFront = rs.getString(10);
-                String CCCDBack = rs.getString(11);
-                String CCCDStatus = rs.getString(12);
-                int status = rs.getInt(13);
-                Date createdDate = rs.getDate(14);
-                u = new User(userID, userNAme, password, email, fullName, img, userType, numberFreePosts, isVerifired, CCCDFront, CCCDBack, CCCDStatus, status, createdDate);
+                String CCCDFront = rs.getString(8);
+                String CCCDBack = rs.getString(9);
+                int status = rs.getInt(10);
+                u = new User(userID, userNAme, password, email, fullName, img, userType, CCCDFront, CCCDBack, status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,8 +91,89 @@ public class DaoUser extends DBContext {
         }
     }
 
+    public boolean checkUserVip(int userID) {
+        String sql = "SELECT [User].UserType \n"
+                + "FROM [User] \n"
+                + "WHERE userID = ?;";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int userType = rs.getInt(1);
+                if (userType == 1) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void identifyAccount(int userID, String cccdFront, String cccdBack) {
+        String sql = "UPDATE [User] \n"
+                + "SET CCCD_Front = ?, CCCD_Back = ?, CCCD_Status = 'Approved'\n"
+                + "WHERE userID = ?;";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, cccdFront);
+            ps.setString(2, cccdBack);
+            ps.setInt(3, userID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String sql2 = "UPDATE [User] \n"
+                + "SET UserType = 1\n"
+                + "WHERE userID = ?;";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql2);
+            ps.setInt(1, userID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkUserName(String userName) {
+        String sql = "Select *from [User] where [Username] = ?";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, userName);
+            rs = ps.executeQuery();
+            if (rs.next() == true) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void register(String userName, String password,String email ,String fullName) {
+        String sql = "INSERT INTO [User] (Username, [Password], Email, FullName, [Usertype]) \n"
+                + "VALUES (?,?,?,?,?);";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            ps.setString(3, email);
+            ps.setString(4, fullName);
+            ps.setInt(5, 2);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         DaoUser d = new DaoUser();
-        d.changeAvatarForUser(1, "a");
+        d.register("a", "a", "a", "a");
     }
 }

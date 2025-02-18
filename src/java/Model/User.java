@@ -18,18 +18,14 @@ public class User {
     private String fullName;
     private String img;
     private String userType;
-    private int numberOfFreePosts;
-    private int isVerified;
     private String CCCDFront;
     private String CCCDBack;
-    private String CCCDStatus;
     private int status;
-    private Date createdAt;
 
     public User() {
     }
 
-    public User(int userID, String userName, String password, String email, String fullName, String img, String userType, int numberOfFreePosts, int isVerified, String CCCDFront, String CCCDBack, String CCCDStatus, int status, Date createdAt) {
+    public User(int userID, String userName, String password, String email, String fullName, String img, String userType, String CCCDFront, String CCCDBack, int status) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
@@ -37,13 +33,9 @@ public class User {
         this.fullName = fullName;
         this.img = img;
         this.userType = userType;
-        this.numberOfFreePosts = numberOfFreePosts;
-        this.isVerified = isVerified;
         this.CCCDFront = CCCDFront;
         this.CCCDBack = CCCDBack;
-        this.CCCDStatus = CCCDStatus;
         this.status = status;
-        this.createdAt = createdAt;
     }
 
     public int getUserID() {
@@ -102,22 +94,6 @@ public class User {
         this.userType = userType;
     }
 
-    public int getNumberOfFreePosts() {
-        return numberOfFreePosts;
-    }
-
-    public void setNumberOfFreePosts(int numberOfFreePosts) {
-        this.numberOfFreePosts = numberOfFreePosts;
-    }
-
-    public int getIsVerified() {
-        return isVerified;
-    }
-
-    public void setIsVerified(int isVerified) {
-        this.isVerified = isVerified;
-    }
-
     public String getCCCDFront() {
         return CCCDFront;
     }
@@ -134,14 +110,6 @@ public class User {
         this.CCCDBack = CCCDBack;
     }
 
-    public String getCCCDStatus() {
-        return CCCDStatus;
-    }
-
-    public void setCCCDStatus(String CCCDStatus) {
-        this.CCCDStatus = CCCDStatus;
-    }
-
     public int getStatus() {
         return status;
     }
@@ -149,16 +117,4 @@ public class User {
     public void setStatus(int status) {
         this.status = status;
     }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    
-
-    
 }

@@ -22,7 +22,7 @@ public class DBContext {
         try {
             String user = "sa";
             String pass = "1234";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=JobCommunity1";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=JobCommunity";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
             System.out.println("Connection established successfully.");

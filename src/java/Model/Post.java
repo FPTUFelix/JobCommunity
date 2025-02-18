@@ -16,19 +16,18 @@ public class Post {
     private String title;
     private String description;
     private String img;
-    private Date  dateStarted;
+    private String  dateStarted;
     private String timeDuration;
     private String place;
     private int salary;
     private String paymentTime;
     private String requirements;
     private int status;
-    private Date cretedDate;
 
     public Post() {
     }
 
-    public Post(int postID, int userID, String title, String description, String img, Date dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, int status, Date cretedDate) {
+    public Post(int postID, int userID, String title, String description, String img, String dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, int status) {
         this.postID = postID;
         this.userID = userID;
         this.title = title;
@@ -41,7 +40,6 @@ public class Post {
         this.paymentTime = paymentTime;
         this.requirements = requirements;
         this.status = status;
-        this.cretedDate = cretedDate;
     }
 
     public int getPostID() {
@@ -84,11 +82,11 @@ public class Post {
         this.img = img;
     }
 
-    public Date getDateStarted() {
+    public String getDateStarted() {
         return dateStarted;
     }
 
-    public void setDateStarted(Date dateStarted) {
+    public void setDateStarted(String dateStarted) {
         this.dateStarted = dateStarted;
     }
 
@@ -138,14 +136,6 @@ public class Post {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public Date getCretedDate() {
-        return cretedDate;
-    }
-
-    public void setCretedDate(Date cretedDate) {
-        this.cretedDate = cretedDate;
     }
     
 }

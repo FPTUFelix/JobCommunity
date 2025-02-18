@@ -17,7 +17,7 @@ public class PostDetail {
     private String title;
     private String Description;
     private String img;
-    private Date startedDate;
+    private String startedDate;
     private String timeDuration;
     private String place;
     private int salary;
@@ -27,7 +27,7 @@ public class PostDetail {
     public PostDetail() {
     }
 
-    public PostDetail(int postID, int userID, String userName, String title, String Description, String img, Date startedDate, String timeDuration, String place, int salary, String paymentTime, String requirements) {
+    public PostDetail(int postID, int userID, String userName, String title, String Description, String img, String startedDate, String timeDuration, String place, int salary, String paymentTime, String requirements) {
         this.postID = postID;
         this.userID = userID;
         this.userName = userName;
@@ -90,11 +90,11 @@ public class PostDetail {
         this.img = img;
     }
 
-    public Date getStartedDate() {
+    public String getStartedDate() {
         return startedDate;
     }
 
-    public void setStartedDate(Date startedDate) {
+    public void setStartedDate(String startedDate) {
         this.startedDate = startedDate;
     }
 

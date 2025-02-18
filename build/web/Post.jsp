@@ -4,7 +4,6 @@
     Author     : sontu
 --%>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <head>
@@ -91,8 +90,43 @@
             <!-- End Page Title -->
 
             <!-- Blog Posts Section -->
-            <section id="blog-posts" class="blog-posts section">
+            <section id="blog-filters" class="blog-filters section">
+                <div class="container">
+                    <form action="blog" method="get" class="row g-3">
+                        <div class="col-md-3">
+                            <label for="category" class="form-label">Danh mục</label>
+                            <select name="category" id="category" class="form-select">
+                                <option value="">Tất cả</option>
+                                <c:forEach items="${listCategories}" var="cat">
+                                    <option value="${cat.id}">${cat.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
 
+                        <div class="col-md-3">
+                            <label for="date" class="form-label">Ngày đăng</label>
+                            <input type="date" name="date" id="date" class="form-control">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="duration" class="form-label">Thời gian</label>
+                            <select name="duration" id="duration" class="form-select">
+                                <option value="">Tất cả</option>
+                                <option value="short">Dưới 30 phút</option>
+                                <option value="medium">30 phút - 1 giờ</option>
+                                <option value="long">Trên 1 giờ</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">Lọc</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Danh sách bài viết -->
+            <section id="blog-posts" class="blog-posts section">
                 <div class="container">
                     <div class="row gy-4">
                         <c:forEach items="${listAllActivePost}" var="lp">
@@ -100,11 +134,9 @@
                                 <article class="position-relative h-100">
                                     <div class="post-img position-relative overflow-hidden">
                                         <img src="${lp.img}" class="img-fluid" alt="Image Job">
-                                        <span class="post-date">${lp.cretedDate}</span>
                                     </div>
 
                                     <div class="post-content d-flex flex-column">
-
                                         <h3 class="post-title">${lp.title}</h3>
 
                                         <div class="meta d-flex align-items-center">
@@ -116,21 +148,18 @@
                                                 <i class="bi bi-clock"></i> <span class="ps-2">${lp.timeDuration}</span>
                                             </div>
                                         </div>
-                                        <p>
-                                            ${lp.description}
-                                        </p>
+                                        <p>${lp.description}</p>
                                         <hr>
-                                        <a href="post_detail?id=${lp.postID}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
+                                        <a href="post_detail?id=${lp.postID}" class="readmore stretched-link">
+                                            <span>Read More</span><i class="bi bi-arrow-right"></i>
+                                        </a>
                                     </div>
                                 </article>
                             </div><!-- End post list item -->
                         </c:forEach>
                     </div>
                 </div>
-
-            </section><!-- /Blog Posts Section -->
-
+            </section>
             <!-- Blog Pagination Section -->
         </main>
         <%@include file="Footer.jsp" %>
