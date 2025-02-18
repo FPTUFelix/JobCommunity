@@ -21,7 +21,7 @@ public class DaoUser extends DBContext {
     private Connection connection = null;
 
     public User getUserName(String userName) {
-        String sql = "select *from [User]\n"
+        String sql = "SELECT * FROM User\n"
                 + "where Username = ?";
         User u = new User();
         try {
@@ -50,7 +50,7 @@ public class DaoUser extends DBContext {
 
     public User getUserbyID(int userID) {
         User u = new User();
-        String sql = "select *from [User]\n"
+        String sql = "SELECT * FROM User\n"
                 + "where UserID = ?";
         try {
             connection = new DBContext().connection;
@@ -77,7 +77,7 @@ public class DaoUser extends DBContext {
     }
 
     public void changeAvatarForUser(int userID, String img) {
-        String sql = "UPDATE [User]\n"
+        String sql = "UPDATE User\n"
                 + "SET Img = ?\n"
                 + "WHERE UserID = ?;";
         try {
@@ -92,7 +92,7 @@ public class DaoUser extends DBContext {
     }
 
     public boolean checkUserVip(int userID) {
-        String sql = "SELECT [User].UserType \n"
+        String sql = "SELECT User.UserType \n"
                 + "FROM [User] \n"
                 + "WHERE userID = ?;";
         try {
@@ -113,7 +113,7 @@ public class DaoUser extends DBContext {
     }
 
     public void identifyAccount(int userID, String cccdFront, String cccdBack) {
-        String sql = "UPDATE [User] \n"
+        String sql = "UPDATE User \n"
                 + "SET CCCD_Front = ?, CCCD_Back = ?, CCCD_Status = 'Approved'\n"
                 + "WHERE userID = ?;";
         try {
@@ -126,7 +126,7 @@ public class DaoUser extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String sql2 = "UPDATE [User] \n"
+        String sql2 = "UPDATE User \n"
                 + "SET UserType = 1\n"
                 + "WHERE userID = ?;";
         try {
@@ -140,7 +140,7 @@ public class DaoUser extends DBContext {
     }
 
     public boolean checkUserName(String userName) {
-        String sql = "Select *from [User] where [Username] = ?";
+        String sql = "Select *from User where Username = ?";
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
@@ -156,7 +156,7 @@ public class DaoUser extends DBContext {
     }
 
     public void register(String userName, String password,String email ,String fullName) {
-        String sql = "INSERT INTO [User] (Username, [Password], Email, FullName, [Usertype]) \n"
+        String sql = "INSERT INTO User (Username, Password, Email, FullName, Usertype) \n"
                 + "VALUES (?,?,?,?,?);";
         try {
             connection = new DBContext().connection;

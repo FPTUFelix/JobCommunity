@@ -24,8 +24,9 @@ public class DaoPost extends DBContext {
     private Connection connection = null;
 
     public List<Post> getPostInHomePage() {
-        String sql = "SELECT TOP 9 * \n"
-                + "FROM Post; \n";
+        String sql = "SELECT * \n"
+                + "FROM Post\n"
+                + "LIMIT 9;";
         List<Post> l = new ArrayList<>();
         try {
             connection = new DBContext().connection;
@@ -98,7 +99,7 @@ public class DaoPost extends DBContext {
                 + "    p.PaymentTime, \n"
                 + "    p.Requirements\n"
                 + "FROM Post p\n"
-                + "JOIN [User] u ON p.UserID = u.UserID\n"
+                + "JOIN User u ON p.UserID = u.UserID\n"
                 + "where PostID = ?";
         try {
             connection = new DBContext().connection;
@@ -147,7 +148,7 @@ public class DaoPost extends DBContext {
         return false;
     }
 
-    public void createNewPost(int userID, String title,String description ,String img, String dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, int status) {
+    public void createNewPost(int userID, String title, String description, String img, String dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, int status) {
         String sql = "INSERT INTO Post (UserID, Title,Description, Img, DateStarted, TimeDuration, Place, Salary, PaymentTime, Requirements, Status)  \n"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {

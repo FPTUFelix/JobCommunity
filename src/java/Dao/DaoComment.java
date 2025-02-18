@@ -5,7 +5,6 @@
 package Dao;
 
 import Model.Comment;
-import Model.Post;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +33,7 @@ public class DaoComment extends DBContext {
                 + "    c.Content, \n"
                 + "    c.CreatedAt\n"
                 + "FROM Comment c\n"
-                + "JOIN [User] u ON c.UserID = u.UserID\n"
+                + "JOIN User u ON c.UserID = u.UserID\n"
                 + "where PostID =?;";
         try {
             connection = new DBContext().connection;
@@ -59,8 +58,8 @@ public class DaoComment extends DBContext {
     }
 
     public void commentInPost(int postID, int userID, String comment) {
-        String sql = "INSERT INTO Comment (PostID, UserID, Content, CreatedAt)  \n"
-                + "VALUES (?, ?, ?, GETDATE());";
+        String sql = "INSERT INTO Comment (PostID, UserID, Content, CreatedAt) \n"
+                + "VALUES (?, ?, ?, NOW());";
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
@@ -72,6 +71,7 @@ public class DaoComment extends DBContext {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         DaoComment d = new DaoComment();
         d.commentInPost(1, 1, "a");
