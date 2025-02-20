@@ -44,6 +44,10 @@
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>Controller.RegisterController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListUserToMessage</servlet-name>
+        <servlet-class>Controller.ListUserToMessage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListUserToMessage</servlet-name>
+        <url-pattern>/list_user_message</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>20</session-timeout>

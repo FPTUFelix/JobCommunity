@@ -8,7 +8,8 @@ import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -155,7 +156,7 @@ public class DaoUser extends DBContext {
         return true;
     }
 
-    public void register(String userName, String password,String email ,String fullName) {
+    public void register(String userName, String password, String email, String fullName) {
         String sql = "INSERT INTO User (Username, Password, Email, FullName, Usertype) \n"
                 + "VALUES (?,?,?,?,?);";
         try {
@@ -172,8 +173,36 @@ public class DaoUser extends DBContext {
         }
     }
 
+    public List<User> getAllUserToMessage() {
+        List<User> l = new ArrayList<>();
+        String sql = "SELECT * FROM User;";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                int userID = rs.getInt(1);
+                String userName = rs.getString(2);
+                String password = rs.getString(3);
+                String email = rs.getString(4);
+                String fullName = rs.getString(5);
+                String img = rs.getString(6);
+                String userType = rs.getString(7);
+                String CCCDFront = rs.getString(8);
+                String CCCDBack = rs.getString(9);
+                int status = rs.getInt(10);
+                User u = new User(userID, userName, password, email, fullName, img, userType, CCCDFront, CCCDBack, status);
+                l.add(u);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+
     public static void main(String[] args) {
         DaoUser d = new DaoUser();
-        System.out.println(d.checkUserName("user1"));
+        List<User> l = d.getAllUserToMessage();
+        System.out.println(l.isEmpty());
     }
 }
