@@ -54,9 +54,11 @@
                         <ol>
                             <li><a href="home">Trang chủ</a></li>
                             <li class="current">Bài Đăng</li>
-                            <li>
-                                <a href="CreatePost.jsp" class="btn-create-post">Tạo Bài Đăng</a>
-                            </li>
+                                <c:if test="${sessionScope.user != null}">
+                                <li>
+                                    <a href="CreatePost.jsp" class="btn-create-post">Tạo Bài Đăng</a>
+                                </li>
+                            </c:if>
                         </ol>
                     </nav>
                 </div>
@@ -85,37 +87,44 @@
                 .breadcrumbs ol li a.btn-create-post:hover {
                     background-color: #0056b3;
                 }
+                .btn-create-post {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #007bff; /* Màu xanh dương */
+                    color: #fff;
+                    font-size: 16px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .btn-create-post:hover {
+                    background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+                    transform: scale(1.05);
+                }
+
+                .btn-create-post:active {
+                    background-color: #003f7f;
+                    transform: scale(0.95);
+                }
+
 
             </style>
             <!-- End Page Title -->
 
             <!-- Blog Posts Section -->
-            <section id="blog-filters" class="blog-filters section">
+           <!--  <section id="blog-filters" class="blog-filters section">
                 <div class="container">
-                    <form action="blog" method="get" class="row g-3">
+                    <form action="list_post_controller" method="get" class="row g-3">
                         <div class="col-md-3">
-                            <label for="category" class="form-label">Danh mục</label>
-                            <select name="category" id="category" class="form-select">
-                                <option value="">Tất cả</option>
-                                <c:forEach items="${listCategories}" var="cat">
-                                    <option value="${cat.id}">${cat.name}</option>
-                                </c:forEach>
-                            </select>
+                            <label for="salary" class="form-label">Mức lương</label>
+                            <input type="number" name="salary" id="salary" class="form-control">
                         </div>
 
                         <div class="col-md-3">
                             <label for="date" class="form-label">Ngày đăng</label>
-                            <input type="date" name="date" id="date" class="form-control">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label for="duration" class="form-label">Thời gian</label>
-                            <select name="duration" id="duration" class="form-select">
-                                <option value="">Tất cả</option>
-                                <option value="short">Dưới 30 phút</option>
-                                <option value="medium">30 phút - 1 giờ</option>
-                                <option value="long">Trên 1 giờ</option>
-                            </select>
+                            <input type="text" name="date" id="date" class="form-control">
                         </div>
 
                         <div class="col-md-3 d-flex align-items-end">
@@ -123,7 +132,7 @@
                         </div>
                     </form>
                 </div>
-            </section>
+            </section>-->
 
             <!-- Danh sách bài viết -->
             <section id="blog-posts" class="blog-posts section">
