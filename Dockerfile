@@ -5,18 +5,18 @@
 FROM alpine:latest
 
 CMD ["/bin/sh"]
-# Sử dụng Maven mới nhất + JDK 17
-FROM maven:latest AS build
-WORKDIR /app
-COPY . .
-RUN mvn clean package
+# Sử dụng Tomcat 9 (hỗ trợ Servlet)
+FROM tomcat:9.0
 
-# Sử dụng OpenJDK nhẹ để chạy ứng dụng
-FROM openjdk:17-jdk-slim
-WORKDIR /app
+# Thiết lập thư mục làm việc
+WORKDIR /usr/local/tomcat/webapps/
 
-# Copy file .war từ giai đoạn build
-COPY --from=build /app/target/MyWebApp-1.0-SNAPSHOT.war /app/MyWebApp.war
+# Copy file .war vào thư mục webapps của Tomcat
+COPY target/MyWebApp-1.0-SNAPSHOT.war MyWebApp.war
 
-# Chạy ứng dụng
-CMD ["java", "-jar", "/app/MyWebApp.war"]
+# Mở cổng mặc định của Tomcat
+EXPOSE 8080
+
+# Chạy Tomcat khi container khởi động
+CMD ["catalina.sh", "run"]
+
