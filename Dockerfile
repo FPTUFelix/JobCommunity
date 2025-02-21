@@ -5,18 +5,18 @@
 FROM alpine:latest
 
 CMD ["/bin/sh"]
-# Sử dụng Maven để build ứng dụng
-FROM maven:3.8.6-openjdk-17 AS build
+# Sử dụng Maven mới nhất + JDK 17
+FROM maven:latest AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package
 
-# Sử dụng JDK nhẹ để chạy ứng dụng
+# Sử dụng OpenJDK nhẹ để chạy ứng dụng
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-# Copy file .war từ bước build trước
+# Copy file .war từ giai đoạn build
 COPY --from=build /app/target/MyWebApp-1.0-SNAPSHOT.war /app/MyWebApp.war
 
-# Lệnh chạy ứng dụng
+# Chạy ứng dụng
 CMD ["java", "-jar", "/app/MyWebApp.war"]
