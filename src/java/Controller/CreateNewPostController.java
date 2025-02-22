@@ -6,6 +6,7 @@ package Controller;
 
 import Dao.DaoPost;
 import Dao.DaoUser;
+import Dao.DaoWorkType;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -63,7 +64,7 @@ public class CreateNewPostController extends HttpServlet {
                 // Hàm để lưu file ảnh và trả về đường dẫn lưu trong DB
 // Lưu từng ảnh và lấy đường dẫn để lưu vào database
                 String imgPath = saveImage(imgPart, savePath);
-
+                
                 int userID = Integer.parseInt(request.getParameter("userID"));
                 String title = request.getParameter("Title");
                 String description = request.getParameter("Description");
@@ -73,18 +74,20 @@ public class CreateNewPostController extends HttpServlet {
                 int salary = Integer.parseInt(request.getParameter("salary"));
                 String paymentTime = request.getParameter("paymentTime");
                 String requirement = request.getParameter("requirement");
+                DaoWorkType daoWorkType = new DaoWorkType();
+                int workType = daoWorkType.changeWorkNametoID(request.getParameter("workType"));
                 DaoPost daoPost = new DaoPost();
                 DaoUser daoUser = new DaoUser();
                 if (daoPost.checkAvaliblePost(userID) == false && daoUser.checkUserVip(userID) == false) {
                     request.setAttribute("mess", "Bạn đã hết lượt đăng bài free hãy xác thực để đăng thêm!");
                 } else {
-                    daoPost.createNewPost(userID, title, description, imgPath, dateStarted, timeDuration, place, salary, paymentTime, requirement, salary);
+                    daoPost.createNewPost(userID, workType, title, description, imgPath, dateStarted, timeDuration, place, salary, paymentTime, requirement, salary);
                     response.sendRedirect("list_post_controller");
                 }
             }
         }
     }
-
+    
     private String saveImage(Part filePart, String savePath) throws IOException {
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         if (fileName == null || fileName.isEmpty()) {

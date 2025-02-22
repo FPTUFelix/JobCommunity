@@ -103,6 +103,13 @@
                                         <h3>Yêu cầu:</h3>
                                         <p>${PostDetail.requirements}</p>
                                     </div><!-- End post content -->
+                                    <c:if test="${PostDetail.userID == sessionScope.user.userID}">
+                                        <c:if test="${PostDetail.status == 1}">
+                                        <a href="inactive_post?postID=${PostDetail.postID}" class="btn login-btn ms-3">Xóa bài đăng</a>
+                                        </c:if>
+                                        <p>Bạn là chủ bài đăng này!</p>
+                                    </c:if>
+
                                 </article>
 
                             </div>
@@ -141,50 +148,65 @@
                                         <h4>Đăng bình luận</h4>
                                         <input type="hidden" value="${sessionScope.user.userID}" name="userID">
                                         <input type="hidden" value="${PostDetail.postID}" name="postID">
-                                               <div class="row">
-                                        <div class="col form-group">
-                                            <textarea name="content" class="form-control" placeholder="Your Comment*"></textarea>
+                                        <div class="row">
+                                            <div class="col form-group">
+                                                <textarea name="content" class="form-control" placeholder="Your Comment*"></textarea>
+                                            </div>
                                         </div>
-                                </div>
 
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Post Comment</button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </section><!-- /Comment Form Section -->
+                        </c:if>
+                        <c:if test="${ empty sessionScope.user}">
+                            <!-- Comment Form Section -->
+                            <section id="comment-form" class="comment-form section">
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                                    <p>You need to login to comment !</p>
                                 </div>
-
-                                </form>
-
                         </div>
                         </section><!-- /Comment Form Section -->
                     </c:if>
-                    <c:if test="${ empty sessionScope.user}">
-                        <!-- Comment Form Section -->
-                        <section id="comment-form" class="comment-form section">
-                            <div class="text-center">
-                                <p>You need to login to comment !</p>
-                            </div>
-                    </div>
-                    </section><!-- /Comment Form Section -->
-                </c:if>
+                </div>
             </div>
         </div>
-    </div>
+        <style>
+            .login-btn {
+                background-color: rgb(30, 50, 186) !important;
+                color: white !important;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 5px;
+                transition: 0.3s;
+                font-family: "Roboto", sans-serif;
+            }
 
-</main>
+            .login-btn:hover {
+                background-color: rgb(62, 112, 186) !important; /* Màu tối hơn khi hover */
+            }
 
-<%@include file="Footer.jsp" %>
+        </style>
+    </main>
 
-<!-- Vendor JS Files -->
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
-<script src="assets/vendor/aos/aos.js"></script>
-<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <%@include file="Footer.jsp" %>
 
-<!-- Main JS File -->
-<script src="assets/js/main.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
 
 </body>
 

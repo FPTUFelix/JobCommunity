@@ -4,7 +4,6 @@
  */
 package Model;
 
-import java.util.Date;
 
 /**
  *
@@ -23,11 +22,13 @@ public class PostDetail {
     private int salary;
     private String paymentTime;
     private String requirements;
+    private String workType;
+    private int status;
 
     public PostDetail() {
     }
 
-    public PostDetail(int postID, int userID, String userName, String title, String Description, String img, String startedDate, String timeDuration, String place, int salary, String paymentTime, String requirements) {
+    public PostDetail(int postID, int userID, String userName, String title, String Description, String img, String startedDate, String timeDuration, String place, int salary, String paymentTime, String requirements, String workType, int status) {
         this.postID = postID;
         this.userID = userID;
         this.userName = userName;
@@ -40,6 +41,8 @@ public class PostDetail {
         this.salary = salary;
         this.paymentTime = paymentTime;
         this.requirements = requirements;
+        this.workType = workType;
+        this.status = status;
     }
 
     public int getPostID() {
@@ -137,5 +140,22 @@ public class PostDetail {
     public void setRequirements(String requirements) {
         this.requirements = requirements;
     }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     
 }

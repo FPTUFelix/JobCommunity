@@ -56,7 +56,7 @@
                             <li class="current">Bài Đăng</li>
                                 <c:if test="${sessionScope.user != null}">
                                 <li>
-                                    <a href="CreatePost.jsp" class="btn-create-post">Tạo Bài Đăng</a>
+                                    <a href="prepare_create_new_post" class="btn-create-post">Tạo Bài Đăng</a>
                                 </li>
                             </c:if>
                         </ol>
@@ -114,17 +114,21 @@
             <!-- End Page Title -->
 
             <!-- Blog Posts Section -->
-           <!--  <section id="blog-filters" class="blog-filters section">
+            <section id="blog-filters" class="blog-filters section">
                 <div class="container">
                     <form action="list_post_controller" method="get" class="row g-3">
                         <div class="col-md-3">
-                            <label for="salary" class="form-label">Mức lương</label>
-                            <input type="number" name="salary" id="salary" class="form-control">
+                            <label for="workType" class="form-label">Loại công việc</label>
+                            <select class="form-control" id="workType" name="workType">
+                                <c:forEach var="f" items="${listWorkType}">
+                                    <option value="${f.typeName}">${f.typeName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="col-md-3">
-                            <label for="date" class="form-label">Ngày đăng</label>
-                            <input type="text" name="date" id="date" class="form-control">
+                            <label for="dateStarted">Ngày bắt đầu</label>
+                            <input type="date" id="dateStarted" name="dateStarted" class="form-control">
                         </div>
 
                         <div class="col-md-3 d-flex align-items-end">
@@ -132,7 +136,55 @@
                         </div>
                     </form>
                 </div>
-            </section>-->
+            </section>
+            <style>
+                #blog-filters {
+                    background: #f8f9fa;
+                    padding: 20px 0;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                }
+
+                #blog-filters .container {
+                    max-width: 900px;
+                }
+
+                #blog-filters label {
+                    font-weight: 600;
+                    color: #333;
+                    margin-bottom: 5px;
+                }
+
+                #blog-filters .form-control {
+                    border-radius: 6px;
+                    border: 1px solid #ced4da;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                #blog-filters .form-control:focus {
+                    border-color: #007bff;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+                }
+
+                #blog-filters button {
+                    background: #007bff;
+                    border: none;
+                    border-radius: 6px;
+                    font-weight: 600;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                #blog-filters button:hover {
+                    background: #0056b3;
+                }
+
+                @media (max-width: 768px) {
+                    #blog-filters .col-md-3 {
+                        width: 100%;
+                    }
+                }
+
+            </style>
 
             <!-- Danh sách bài viết -->
             <section id="blog-posts" class="blog-posts section">

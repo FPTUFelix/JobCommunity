@@ -41,31 +41,36 @@ public class ChangeAvatarController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ServletContext context = request.getServletContext();
-            /* TODO output your page here. You may use following sample code. */
-            String savePath = context.getRealPath("/IMG");
+            if (request.getParameter("userID").isEmpty()) {
+                response.sendRedirect("Login.jsp");
+            } else {
+                ServletContext context = request.getServletContext();
+                /* TODO output your page here. You may use following sample code. */
+                String savePath = context.getRealPath("/IMG");
 
 // Kiểm tra và tạo thư mục nếu nó chưa tồn tại
-            File uploadDir = new File(savePath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
+                File uploadDir = new File(savePath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
+                }
 // Lấy file từ request (ví dụ thumbnail, img1, img2, img3)
-            Part imgPart = request.getPart("img");
-            // Hàm để lưu file ảnh và trả về đường dẫn lưu trong DB
+                Part imgPart = request.getPart("img");
+                // Hàm để lưu file ảnh và trả về đường dẫn lưu trong DB
 // Lưu từng ảnh và lấy đường dẫn để lưu vào database
-            String imgPath = saveImage(imgPart, savePath);
-            int userID = Integer.parseInt(request.getParameter("userID"));
-            if (imgPath == null) {
-                String mess = "Hãy chọn ảnh để cập nhật ảnh đại diện!";
-                request.setAttribute("mess", mess);
-                request.getRequestDispatcher("user_profile?userID="+userID).forward(request, response);
-            } else {
-                DaoUser daoUser = new DaoUser();
-                daoUser.changeAvatarForUser(userID, imgPath);
-                String mess = "Update Sucessful!";
-                request.setAttribute("mess", mess);
-                response.sendRedirect("user_profile?userID="+userID);
+                String imgPath = saveImage(imgPart, savePath);
+                int userID = Integer.parseInt(request.getParameter("userID"));
+                String fullName = request.getParameter("fullName");
+                if (imgPath == null) {
+                    String mess = "Hãy chọn ảnh để cập nhật ảnh đại diện!";
+                    request.setAttribute("mess", mess);
+                    request.getRequestDispatcher("user_profile?userID=" + userID).forward(request, response);
+                } else {
+                    DaoUser daoUser = new DaoUser();
+                    daoUser.changeAvatarForUser(userID, imgPath, fullName);
+                    String mess = "Update Sucessful!";
+                    request.setAttribute("mess", mess);
+                    response.sendRedirect("user_profile?userID=" + userID);
+                }
             }
         }
     }

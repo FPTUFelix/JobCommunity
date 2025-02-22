@@ -99,10 +99,14 @@
 
                                 <label for="paymentTime">Thời gian thanh toán</label>
                                 <input type="text" id="paymentTime" name="paymentTime" class="form-control" required>
-
+                                <label for="workType" class="form-label">Loại công việc</label>
+                                <select class="form-control" id="workType" name="workType">
+                                    <c:forEach var="f" items="${listWorkType}">
+                                        <option value="${f.typeName}">${f.typeName}</option>
+                                    </c:forEach>
+                                </select>
                                 <label for="requirement">Yêu cầu</label>
                                 <textarea id="requirement" name="requirement" class="form-control" rows="3" required></textarea>
-
                                 <button type="submit" class="btn btn-primary mt-3">Đăng bài</button>
                             </form>
                         </div>

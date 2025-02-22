@@ -75,7 +75,8 @@
                                         <div class="text-center">
                                             <!-- Truyền userID từ session -->
                                             <input type="hidden" name="userID" value="${sessionScope.user.userID}">
-
+                                            <label for="fullName" class="form-label">Họ và Tên</label>
+                                            <input type="text" id="fullName" name="fullName" required><br>
                                             <!-- Chọn ảnh -->
                                             <label for="thumbnail" class="form-label">Chọn ảnh đại diện</label>
                                             <input type="file" class="form-control mt-2" id="thumbnail" name="img" 
@@ -85,8 +86,7 @@
                                             <div class="preview-container mt-3">
                                                 <img id="previewThumbnail" src="" alt="Ảnh xem trước" 
                                                      style="display:none; width:150px; height:150px; border-radius:50%; object-fit:cover; border:4px solid #007bff;">
-                                            </div>
-
+                                            </div>                                     
                                             <!-- Nút tải lên -->
                                             <button class="btn btn-primary btn-sm mt-3" type="submit">Tải lên</button>
                                         </div>

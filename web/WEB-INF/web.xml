@@ -48,6 +48,18 @@
         <servlet-name>ListUserToMessage</servlet-name>
         <servlet-class>Controller.ListUserToMessage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PrepareToCreateNewPostController</servlet-name>
+        <servlet-class>Controller.PrepareToCreateNewPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListPostByUserController</servlet-name>
+        <servlet-class>Controller.ListPostByUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InactivePostController</servlet-name>
+        <servlet-class>Controller.InactivePostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -96,8 +108,20 @@
         <servlet-name>ListUserToMessage</servlet-name>
         <url-pattern>/list_user_message</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrepareToCreateNewPostController</servlet-name>
+        <url-pattern>/prepare_create_new_post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListPostByUserController</servlet-name>
+        <url-pattern>/list_post_by_user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InactivePostController</servlet-name>
+        <url-pattern>/inactive_post</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>20</session-timeout>
+        <session-timeout>200</session-timeout>
         <!-- Đơn vị: phút -->
     </session-config>
 </web-app>

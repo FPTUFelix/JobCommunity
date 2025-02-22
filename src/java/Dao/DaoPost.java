@@ -24,9 +24,13 @@ public class DaoPost extends DBContext {
     private Connection connection = null;
 
     public List<Post> getPostInHomePage() {
-        String sql = "SELECT * \n"
-                + "FROM Post\n"
+        String sql = "SELECT p.PostID, p.UserID, p.Title, p.Description, p.Img, "
+                + "p.DateStarted, p.TimeDuration, p.Place, p.Salary, "
+                + "p.PaymentTime, p.Requirements, w.TypeName, p.Status "
+                + "FROM Post p "
+                + "JOIN WorkType w ON p.WorkTypeID = w.WorkTypeID "
                 + "LIMIT 9;";
+
         List<Post> l = new ArrayList<>();
         try {
             connection = new DBContext().connection;
@@ -44,8 +48,12 @@ public class DaoPost extends DBContext {
                 int salary = rs.getInt(9);
                 String paymentTime = rs.getString(10);
                 String requirements = rs.getString(11);
-                int status = rs.getInt(12);
-                Post p = new Post(postID, userID, title, description, img, dateStarted, timeDuration, place, salary, paymentTime, requirements, status);
+                String workType = rs.getString(12);
+                int status = rs.getInt(13);
+
+                Post p = new Post(postID, userID, title, description, img, dateStarted,
+                        timeDuration, place, salary, paymentTime,
+                        requirements, workType, status);
                 l.add(p);
             }
         } catch (Exception e) {
@@ -54,12 +62,36 @@ public class DaoPost extends DBContext {
         return l;
     }
 
-    public List<Post> getAllPost() {
-        String sql = "SELECT * FROM Post WHERE Status = 1;";
+    public List<Post> getAllPostActive(String typeName, String dateStarte) {
+        String sql = "SELECT "
+                + "     p.PostID, "
+                + "     p.UserID, "
+                + "     p.Title, "
+                + "     p.Description, "
+                + "     p.Img, "
+                + "     p.DateStarted, "
+                + "     p.TimeDuration, "
+                + "     p.Place, "
+                + "     p.Salary, "
+                + "     p.PaymentTime, "
+                + "     p.Requirements, "
+                + "     w.TypeName AS WorkType, "
+                + "     p.Status "
+                + " FROM Post p "
+                + " JOIN WorkType w ON p.WorkTypeID = w.WorkTypeID "
+                + " WHERE "
+                + "     (COALESCE(?, '') = '' OR w.TypeName = ?) "
+                + "     AND (COALESCE(?, '') = '' OR p.DateStarted = ?)"
+                + "AND p.Status=1;";
+
         List<Post> l = new ArrayList<>();
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
+            ps.setString(1, typeName);
+            ps.setString(2, typeName);
+            ps.setString(3, dateStarte);
+            ps.setString(4, dateStarte);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int postID = rs.getInt(1);
@@ -73,8 +105,12 @@ public class DaoPost extends DBContext {
                 int salary = rs.getInt(9);
                 String paymentTime = rs.getString(10);
                 String requirements = rs.getString(11);
-                int status = rs.getInt(12);
-                Post p = new Post(postID, userID, title, description, img, dateStarted, timeDuration, place, salary, paymentTime, requirements, status);
+                String workType = rs.getString(12);
+                int status = rs.getInt(13);
+
+                Post p = new Post(postID, userID, title, description, img, dateStarted,
+                        timeDuration, place, salary, paymentTime,
+                        requirements, workType, status);
                 l.add(p);
             }
         } catch (Exception e) {
@@ -85,22 +121,14 @@ public class DaoPost extends DBContext {
 
     public PostDetail getPostbyID(int postID) {
         PostDetail p = new PostDetail();
-        String sql = "SELECT \n"
-                + "    p.PostID, \n"
-                + "    p.UserID, \n"
-                + "    u.Username, \n"
-                + "    p.Title, \n"
-                + "    p.Description, \n"
-                + "    p.Img, \n"
-                + "    p.DateStarted, \n"
-                + "    p.TimeDuration, \n"
-                + "    p.Place, \n"
-                + "    p.Salary, \n"
-                + "    p.PaymentTime, \n"
-                + "    p.Requirements\n"
-                + "FROM Post p\n"
-                + "JOIN User u ON p.UserID = u.UserID\n"
-                + "where PostID = ?";
+        String sql = "SELECT p.PostID, p.UserID, u.Username, p.Title, p.Description, p.Img, "
+                + "p.DateStarted, p.TimeDuration, p.Place, p.Salary, p.PaymentTime, "
+                + "p.Requirements, w.TypeName, p.Status "
+                + "FROM Post p "
+                + "JOIN User u ON p.UserID = u.UserID "
+                + "JOIN WorkType w ON p.WorkTypeID = w.WorkTypeID "
+                + "WHERE p.PostID = ?;";
+
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
@@ -119,7 +147,9 @@ public class DaoPost extends DBContext {
                 int salary = rs.getInt(10);
                 String paymentTime = rs.getString(11);
                 String requiremnts = rs.getString(12);
-                p = new PostDetail(postiD, userID, userName, title, description, img, dateStarted, timeDuration, place, salary, paymentTime, requiremnts);
+                String workType = rs.getString(13);
+                int status = rs.getInt(14);
+                p = new PostDetail(postiD, userID, userName, title, description, img, dateStarted, timeDuration, place, salary, paymentTime, requiremnts, workType, status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,24 +178,76 @@ public class DaoPost extends DBContext {
         return false;
     }
 
-    public void createNewPost(int userID, String title, String description, String img, String dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, int status) {
-        String sql = "INSERT INTO Post (UserID, Title,Description, Img, DateStarted, TimeDuration, Place, Salary, PaymentTime, Requirements, Status)  \n"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    public void createNewPost(int userID, int workTypeID, String title, String description, String img, String dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, int status) {
+        String sql = "INSERT INTO Post (UserID, WorkTypeID, Title, Description, Img, DateStarted, TimeDuration, Place, Salary, PaymentTime, Requirements, Status)  \n"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
             ps.setInt(1, userID);
-            ps.setString(2, title);
-            ps.setString(3, description);
-            ps.setString(4, img);
-            ps.setString(5, dateStarted);
-            ps.setString(6, timeDuration);
-            ps.setString(7, place);
-            ps.setInt(8, salary);
-            ps.setString(9, paymentTime);
-            ps.setString(10, requirements);
-            ps.setInt(11, status);
+            ps.setInt(2, workTypeID);
+            ps.setString(3, title);
+            ps.setString(4, description);
+            ps.setString(5, img);
+            ps.setString(6, dateStarted);
+            ps.setString(7, timeDuration);
+            ps.setString(8, place);
+            ps.setInt(9, salary);
+            ps.setString(10, paymentTime);
+            ps.setString(11, requirements);
+            ps.setInt(12, status);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Post> getPostByUserID(int useriD) {
+        String sql = "SELECT p.PostID, p.UserID, p.Title, p.Description, p.Img, \n"
+                + "       p.DateStarted, p.TimeDuration, p.Place, p.Salary, \n"
+                + "       p.PaymentTime, p.Requirements, w.TypeName, p.Status\n"
+                + "FROM Post p\n"
+                + "JOIN WorkType w ON p.WorkTypeID = w.WorkTypeID\n"
+                + "WHERE p.UserID = ?;";
+        List<Post> l = new ArrayList<>();
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, useriD);
             rs = ps.executeQuery();
+            while (rs.next()) {
+                int postID = rs.getInt(1);
+                int userID = rs.getInt(2);
+                String title = rs.getString(3);
+                String description = rs.getString(4);
+                String img = rs.getString(5);
+                String dateStarted = rs.getString(6);
+                String timeDuration = rs.getString(7);
+                String place = rs.getString(8);
+                int salary = rs.getInt(9);
+                String paymentTime = rs.getString(10);
+                String requirements = rs.getString(11);
+                String workType = rs.getString(12);
+                int status = rs.getInt(13);
+
+                Post p = new Post(postID, userID, title, description, img, dateStarted,
+                        timeDuration, place, salary, paymentTime,
+                        requirements, workType, status);
+                l.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+
+    public void inactivePost(int postID) {
+        String sql = "UPDATE Post SET Status=0 WHERE PostID=?";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, postID);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -173,7 +255,7 @@ public class DaoPost extends DBContext {
 
     public static void main(String[] args) {
         DaoPost dao = new DaoPost();
-        List<Post> l = dao.getAllPost();
-        System.out.println(dao.checkAvaliblePost(1));
+        List<Post> l = dao.getAllPostActive("", "");
+        System.out.println(l.isEmpty());
     }
 }

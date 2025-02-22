@@ -22,12 +22,13 @@ public class Post {
     private int salary;
     private String paymentTime;
     private String requirements;
+    private String workType;
     private int status;
 
     public Post() {
     }
 
-    public Post(int postID, int userID, String title, String description, String img, String dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, int status) {
+    public Post(int postID, int userID, String title, String description, String img, String dateStarted, String timeDuration, String place, int salary, String paymentTime, String requirements, String workType, int status) {
         this.postID = postID;
         this.userID = userID;
         this.title = title;
@@ -39,6 +40,7 @@ public class Post {
         this.salary = salary;
         this.paymentTime = paymentTime;
         this.requirements = requirements;
+        this.workType = workType;
         this.status = status;
     }
 
@@ -128,6 +130,14 @@ public class Post {
 
     public void setRequirements(String requirements) {
         this.requirements = requirements;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
     }
 
     public int getStatus() {

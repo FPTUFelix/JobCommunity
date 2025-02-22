@@ -77,15 +77,17 @@ public class DaoUser extends DBContext {
         return u;
     }
 
-    public void changeAvatarForUser(int userID, String img) {
+    public void changeAvatarForUser(int userID, String img, String fullName) {
         String sql = "UPDATE User\n"
-                + "SET Img = ?\n"
+                + "SET Img = ?,\n"
+                + "FullName = ?\n"
                 + "WHERE UserID = ?;";
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
             ps.setString(1, img);
-            ps.setInt(2, userID);
+            ps.setString(2, fullName);
+            ps.setInt(3, userID);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +96,7 @@ public class DaoUser extends DBContext {
 
     public boolean checkUserVip(int userID) {
         String sql = "SELECT User.UserType \n"
-                + "FROM [User] \n"
+                + "FROM User \n"
                 + "WHERE userID = ?;";
         try {
             connection = new DBContext().connection;
@@ -202,7 +204,6 @@ public class DaoUser extends DBContext {
 
     public static void main(String[] args) {
         DaoUser d = new DaoUser();
-        List<User> l = d.getAllUserToMessage();
-        System.out.println(l.isEmpty());
+        d.changeAvatarForUser(1, "a", "a");
     }
 }

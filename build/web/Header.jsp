@@ -56,6 +56,7 @@
                         <li><a href="Introduction.jsp">Giới thiệu</a></li>
                         <li><a href="list_post_controller">Bài Đăng</a></li>
                         <li><a href="list_user_message">Nhắn tin</a></li>
+                        <li><a href="list_post_by_user?userID=${sessionScope.user.userID}">Bài đăng của tôi</a></li>
                         <!-- Kiểm tra nếu đã đăng nhập thì hiển thị dropdown -->
                         <c:if test="${not empty sessionScope.user}">
                             <li class="dropdown">

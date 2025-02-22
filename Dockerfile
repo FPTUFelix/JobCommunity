@@ -4,19 +4,19 @@
 
 FROM alpine:latest
 
-CMD ["/bin/sh"]
-# Sử dụng Tomcat 9 (hỗ trợ Servlet)
-FROM tomcat:9.0
+# Sử dụng image có sẵn của Maven và Java
+FROM maven:3.9.9-eclipse-temurin-17
 
-# Thiết lập thư mục làm việc
-WORKDIR /usr/local/tomcat/webapps/
+# Đặt thư mục làm việc trong container
+WORKDIR /app
 
-# Copy file .war vào thư mục webapps của Tomcat
-COPY target/MyWebApp-1.0-SNAPSHOT.war MyWebApp.war
+# Copy toàn bộ project vào container
+COPY . .
 
-# Mở cổng mặc định của Tomcat
-EXPOSE 8080
+# Biên dịch và đóng gói ứng dụng
+RUN mvn clean package
 
-# Chạy Tomcat khi container khởi động
-CMD ["catalina.sh", "run"]
+# Chạy ứng dụng (nếu là ứng dụng Spring Boot hoặc Java Application)
+CMD ["java", "-jar", "target/MyWebApp-1.0-SNAPSHOT.war"]
+
 
