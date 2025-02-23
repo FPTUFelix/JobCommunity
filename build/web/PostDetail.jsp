@@ -99,8 +99,8 @@
                                         <h3>Thời gian làm:</h3>
                                         <p>${PostDetail.timeDuration}</p>
                                         <h3>Lương:</h3>
-                                        <p>${PostDetail.salary}</p>
-                                        <h3>Yêu cầu:</h3>
+                                        <p>${PostDetail.salary}VND</p>
+                                        <h3>Yêu cầu(cho nhân công):</h3>
                                         <p>${PostDetail.requirements}</p>
                                     </div><!-- End post content -->
                                     <c:if test="${PostDetail.userID == sessionScope.user.userID}">
@@ -126,7 +126,7 @@
                                         <div class="d-flex">
                                             <div class="comment-img"><img src="${lc.img}" alt="image"></div>
                                             <div>
-                                                <h5><a href="">${lc.userName}</a></h5>
+                                                <h5><a href="user_profile?userID=${lc.userID}">${lc.userName}</a></h5>
                                                 <time datetime="2020-01-01">${lc.createdAt}</time>
                                                 <p>
                                                     ${lc.content}

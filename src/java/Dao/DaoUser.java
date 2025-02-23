@@ -37,11 +37,12 @@ public class DaoUser extends DBContext {
                 String email = rs.getString(4);
                 String fullName = rs.getString(5);
                 String img = rs.getString(6);
-                String userType = rs.getString(7);
-                String CCCDFront = rs.getString(8);
-                String CCCDBack = rs.getString(9);
-                int status = rs.getInt(10);
-                u = new User(userID, userNAme, password, email, fullName, img, userType, CCCDFront, CCCDBack, status);
+                String phone = rs.getString(7);
+                String userType = rs.getString(8);
+                String CCCDFront = rs.getString(9);
+                String CCCDBack = rs.getString(10);
+                int status = rs.getInt(11);
+                u = new User(userID, userNAme, password, email, fullName, img, phone, userType, CCCDFront, CCCDBack, status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,11 +66,12 @@ public class DaoUser extends DBContext {
                 String email = rs.getString(4);
                 String fullName = rs.getString(5);
                 String img = rs.getString(6);
-                String userType = rs.getString(7);
-                String CCCDFront = rs.getString(8);
-                String CCCDBack = rs.getString(9);
-                int status = rs.getInt(10);
-                u = new User(userID, userNAme, password, email, fullName, img, userType, CCCDFront, CCCDBack, status);
+                String phone = rs.getString(7);
+                String userType = rs.getString(8);
+                String CCCDFront = rs.getString(9);
+                String CCCDBack = rs.getString(10);
+                int status = rs.getInt(11);
+                u = new User(userID, userNAme, password, email, fullName, img, phone, userType, CCCDFront, CCCDBack, status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,7 +99,7 @@ public class DaoUser extends DBContext {
     public boolean checkUserVip(int userID) {
         String sql = "SELECT User.UserType \n"
                 + "FROM User \n"
-                + "WHERE userID = ?;";
+                + "WHERE UserID = ?;";
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
@@ -150,17 +152,33 @@ public class DaoUser extends DBContext {
             ps.setString(1, userName);
             rs = ps.executeQuery();
             if (rs.next() == true) {
-                return false;
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
-    public void register(String userName, String password, String email, String fullName) {
-        String sql = "INSERT INTO User (Username, Password, Email, FullName, Usertype) \n"
-                + "VALUES (?,?,?,?,?);";
+    public boolean checkEmail(String email) {
+        String sql = "Select *from User where Email = ?";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next() == true) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void register(String userName, String password, String email, String fullName, String phone) {
+        String sql = "INSERT INTO User (Username, Password, Email, FullName, Phone, Usertype) \n"
+                + "VALUES (?,?,?,?,?,?);";
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
@@ -168,32 +186,34 @@ public class DaoUser extends DBContext {
             ps.setString(2, password);
             ps.setString(3, email);
             ps.setString(4, fullName);
-            ps.setInt(5, 2);
+            ps.setString(5, phone);
+            ps.setInt(6, 2);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public List<User> getAllUserToMessage() {
+    public List<User> getAllUser() {
+        String sql = "Select *from User";
         List<User> l = new ArrayList<>();
-        String sql = "SELECT * FROM User;";
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 int userID = rs.getInt(1);
                 String userName = rs.getString(2);
                 String password = rs.getString(3);
                 String email = rs.getString(4);
                 String fullName = rs.getString(5);
-                String img = rs.getString(6);
-                String userType = rs.getString(7);
-                String CCCDFront = rs.getString(8);
-                String CCCDBack = rs.getString(9);
-                int status = rs.getInt(10);
-                User u = new User(userID, userName, password, email, fullName, img, userType, CCCDFront, CCCDBack, status);
+                String phone = rs.getString(6);
+                String img = rs.getString(7);
+                String userType = rs.getString(8);
+                String CCCDFront = rs.getString(9);
+                String CCCDBack = rs.getString(10);
+                int status = rs.getInt(11);
+                User u = new User(userID, userName, password, email, fullName, phone, img, userType, CCCDFront, CCCDBack, status);
                 l.add(u);
             }
         } catch (Exception e) {
@@ -202,8 +222,36 @@ public class DaoUser extends DBContext {
         return l;
     }
 
+    public void cancelUser(int userID) {
+        String sql = "UPDATE User\n"
+                + "SET userType = 2\n"
+                + "WHERE userID = ?;";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void acceptUser(int userID) {
+        String sql = "UPDATE User\n"
+                + "SET userType = 1\n"
+                + "WHERE userID = ?;";
+        try {
+            connection = new DBContext().connection;
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         DaoUser d = new DaoUser();
-        d.changeAvatarForUser(1, "a", "a");
+        User u = d.getUserbyID(1);
+        System.out.println(u.getFullName());
     }
 }

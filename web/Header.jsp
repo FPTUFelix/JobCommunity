@@ -55,13 +55,13 @@
                         <li><a href="home" class="active">Trang chủ</a></li>
                         <li><a href="Introduction.jsp">Giới thiệu</a></li>
                         <li><a href="list_post_controller">Bài Đăng</a></li>
-<!--                        <li><a href="list_user_message">Nhắn tin</a></li>-->
+                        <!--                        <li><a href="list_user_message">Nhắn tin</a></li>-->
                         <li><a href="list_post_by_user?userID=${sessionScope.user.userID}">Bài đăng của tôi</a></li>
                         <!-- Kiểm tra nếu đã đăng nhập thì hiển thị dropdown -->
                         <c:if test="${not empty sessionScope.user}">
                             <li class="dropdown">
                                 <a href="user_profile?userID=${sessionScope.user.userID}">
-                                    <span>Xin Chào ${sessionScope.user.userName}</span> 
+                                    <span>Xin Chào ${sessionScope.user.fullName}</span> 
                                     <i class="bi bi-chevron-down toggle-dropdown"></i>
                                 </a>
                                 <ul>
@@ -70,6 +70,9 @@
                                 </ul>
                             </li>
                         </c:if>
+                        <c:if test="${sessionScope.user.userType == 0}">
+                            <li><a href="list_user">Danh sách người dùng</a></li>
+                            </c:if>
                     </ul>
                     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>

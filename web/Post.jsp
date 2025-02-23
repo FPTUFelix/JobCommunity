@@ -59,6 +59,7 @@
                                     <a href="prepare_create_new_post" class="btn-create-post">Tạo Bài Đăng</a>
                                 </li>
                             </c:if>
+
                         </ol>
                     </nav>
                 </div>
@@ -114,78 +115,182 @@
             <!-- End Page Title -->
 
             <!-- Blog Posts Section -->
-            <section id="blog-filters" class="blog-filters section">
-                <div class="container">
-                    <form action="list_post_controller" method="get" class="row g-3">
-                        <div class="col-md-3">
-                            <label for="workType" class="form-label">Loại công việc</label>
-                            <select class="form-control" id="workType" name="workType">
-                                <c:forEach var="f" items="${listWorkType}">
-                                    <option value="${f.typeName}">${f.typeName}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+            <div class="wrapper">
+                <section id="blog-filters" class="blog-filters section">
+                    <div class="container">
+                        <form action="list_post_controller" method="get" class="row g-3">
+                            <div class="col-md-3">
+                                <label for="workType" class="form-label">Loại công việc:</label>
+                                <select class="form-control" id="workType" name="workType">
+                                    <c:forEach var="f" items="${listWorkType}">
+                                        <option value="${f.typeName}">${f.typeName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
 
-                        <div class="col-md-3">
-                            <label for="dateStarted">Ngày bắt đầu</label>
-                            <input type="date" id="dateStarted" name="dateStarted" class="form-control">
-                        </div>
+                            <div class="col-md-3">
+                                <label for="dateStarted">Ngày bắt đầu:</label>
+                                <input type="date" id="dateStarted" name="dateStarted" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dateStarted">Lương:</label>
+                                <input type="number" id="salary" name="salary" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="startTime">Từ</label>
+                                <select class="form-control" id="startTime" name="startTime">
+                                    <option value="">All</option>
+                                    <option value="1h">1h</option>
+                                    <option value="2h">2h</option>
+                                    <option value="3h">3h</option>
+                                    <option value="4h">4h</option>
+                                    <option value="5h">5h</option>
+                                    <option value="6h">6h</option>
+                                    <option value="7h">7h</option>
+                                    <option value="8h">8h</option>
+                                    <option value="9h">9h</option>
+                                    <option value="10h">10h</option>
+                                    <option value="11h">11h</option>
+                                    <option value="12h">12h</option>
+                                    <option value="13h">13h</option>
+                                    <option value="14h">14h</option>
+                                    <option value="15h">15h</option>
+                                    <option value="16h">16h</option>
+                                    <option value="17h">17h</option>
+                                    <option value="18h">18h</option>
+                                    <option value="19h">19h</option>
+                                    <option value="20h">20h</option>
+                                    <option value="21h">21h</option>
+                                    <option value="22h">22h</option>
+                                    <option value="23h">23h</option>
+                                    <option value="24h">24h</option>
+                                </select>
+                                <label for="endTime">Đến</label>
+                                <select class="form-control" id="endTime" name="endTime">
+                                    <option value="">All</option>
+                                    <option value="1h">1h</option>
+                                    <option value="2h">2h</option>
+                                    <option value="3h">3h</option>
+                                    <option value="4h">4h</option>
+                                    <option value="5h">5h</option>
+                                    <option value="6h">6h</option>
+                                    <option value="7h">7h</option>
+                                    <option value="8h">8h</option>
+                                    <option value="9h">9h</option>
+                                    <option value="10h">10h</option>
+                                    <option value="11h">11h</option>
+                                    <option value="12h">12h</option>
+                                    <option value="13h">13h</option>
+                                    <option value="14h">14h</option>
+                                    <option value="15h">15h</option>
+                                    <option value="16h">16h</option>
+                                    <option value="17h">17h</option>
+                                    <option value="18h">18h</option>
+                                    <option value="19h">19h</option>
+                                    <option value="20h">20h</option>
+                                    <option value="21h">21h</option>
+                                    <option value="22h">22h</option>
+                                    <option value="23h">23h</option>
+                                    <option value="24h">24h</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">Lọc</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
 
-                        <div class="col-md-3 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary w-100">Lọc</button>
-                        </div>
-                    </form>
+                <div class="content">
+                    <p style="color: red">Lưu ý: Xác thực tài khoản trước khi tham gia hoạt động!</p>
+                    <!-- Nội dung bài đăng khác -->
                 </div>
-            </section>
+            </div>
+
             <style>
-                #blog-filters {
-                    background: #f8f9fa;
-                    padding: 20px 0;
-                    border-radius: 8px;
+                .blog-filters {
+                    padding: 25px;
+                    background: #ffffff;
+                    border-radius: 12px;
                     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
                 }
 
-                #blog-filters .container {
-                    max-width: 900px;
+                .blog-filters .container {
+                    max-width: 1200px;
                 }
 
-                #blog-filters label {
+                .blog-filters .form-label {
                     font-weight: 600;
-                    color: #333;
+                    font-size: 14px;
                     margin-bottom: 5px;
                 }
 
-                #blog-filters .form-control {
-                    border-radius: 6px;
-                    border: 1px solid #ced4da;
+                .blog-filters .form-control {
+                    border-radius: 8px;
+                    border: 1px solid #ddd;
+                    padding: 10px;
+                    font-size: 16px;
                     transition: all 0.3s ease-in-out;
                 }
 
-                #blog-filters .form-control:focus {
+                .blog-filters .form-control:focus {
                     border-color: #007bff;
-                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+                    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
                 }
 
-                #blog-filters button {
-                    background: #007bff;
-                    border: none;
-                    border-radius: 6px;
+                .blog-filters .row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+
+                .blog-filters .col-md-3 {
+                    flex: 1;
+                    min-width: 220px;
+                }
+
+                .blog-filters select.form-control {
+                    appearance: none;
+                    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 1 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: right 12px center;
+                    background-size: 14px;
+                    padding-right: 35px;
+                }
+
+                .blog-filters .btn-primary {
+                    padding: 10px;
+                    font-size: 16px;
                     font-weight: 600;
+                    border-radius: 8px;
                     transition: all 0.3s ease-in-out;
                 }
 
-                #blog-filters button:hover {
-                    background: #0056b3;
+                .blog-filters .btn-primary:hover {
+                    transform: scale(1.05);
                 }
 
                 @media (max-width: 768px) {
-                    #blog-filters .col-md-3 {
+                    .blog-filters .row {
+                        flex-direction: column;
+                        gap: 10px;
+                    }
+
+                    .blog-filters .col-md-3 {
                         width: 100%;
+                    }
+
+                    .blog-filters .d-flex {
+                        justify-content: center;
                     }
                 }
 
             </style>
-
+            <c:if test="${empty listAllActivePost}">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                    <p class="text-muted fs-5">Không có bài đăng nào phù hợp</p>
+                </div>
+            </c:if>
             <!-- Danh sách bài viết -->
             <section id="blog-posts" class="blog-posts section">
                 <div class="container">

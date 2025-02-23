@@ -57,6 +57,10 @@
                                     <input type="text" id="form2Example28" class="form-control form-control-lg" name="fullName" placeholder="Họ và tên" required/>
                                     <label class="form-label" for="form2Example28">Họ và Tên</label>
                                 </div>
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <input type="number" id="form2Example28" class="form-control form-control-lg" name="phone" placeholder="Số điện thoại" required/>
+                                    <label class="form-label" for="form2Example28">Số điện thoại</label>
+                                </div>
                                 <div class="pt-1 mb-4">
                                     <button data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-block" type="submit">Đăng ký</button>
                                 </div>

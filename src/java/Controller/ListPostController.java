@@ -38,11 +38,17 @@ public class ListPostController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String workType = request.getParameter("workType") == null ? "" : request.getParameter("workType");
             String dateStarted = request.getParameter("dateStarted") == null ? "" : request.getParameter("dateStarted");
+            String startTime = request.getParameter("startTime");
+            String endTime = request.getParameter("endTime");
+            String timeDuration = (startTime != null && endTime != null && !startTime.isEmpty() && !endTime.isEmpty())
+                    ? startTime + "-" + endTime
+                    : "";
+            String salaryPara = request.getParameter("salary");
             DaoPost daoPost = new DaoPost();
             DaoWorkType daoWorkType = new DaoWorkType();
             List<WorkType> listWorkType = daoWorkType.getAllWorkType();
             request.setAttribute("listWorkType", listWorkType);
-            List<Post> listAllActivePost = daoPost.getAllPostActive(workType, dateStarted);
+            List<Post> listAllActivePost = daoPost.getAllPostActive(workType, dateStarted, timeDuration, salaryPara);
             request.setAttribute("listAllActivePost", listAllActivePost);
             request.getRequestDispatcher("Post.jsp").forward(request, response);
         }

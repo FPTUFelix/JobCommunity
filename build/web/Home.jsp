@@ -91,31 +91,73 @@
                 </div>
 
             </section><!-- /Hero Section -->
-            <!-- Services Section -->
+            <!-- Services Section -->     
             <section id="services" class="services section light-background">
                 <div class="container section-title" data-aos="fade-up">
                     <h2>Công việc</h2>
                 </div>
                 <div class="container">
-                    <div class="row gy-4">
+                    <div class="row">
                         <c:forEach items="${listPostHomePage}" var="l">
-                            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                                <div class="service-item item-cyan position-relative">
-                                    <div class="icon">
-                                        <!-- Thay thế icon bằng hình ảnh -->
-                                        <img src="${l.img}" alt="service icon" width="100" height="100">
-                                    </div>
-                                    <a href="post_detail?id=${l.postID}" class="stretched-link">
-                                        <h3>${l.title}</h3>
-                                    </a>
-                                    <p>${l.description}</p>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="job-card">
+                                    <h3>${l.title}</h3>
+                                    <p><strong>Loại công việc:</strong> ${l.workType}</p>
+                                    <p><strong>Ngày làm việc:</strong> ${l.dateStarted}</p>
+                                    <p><strong>Địa điểm:</strong> ${l.place}</p>
+                                    <p><strong>Lương:</strong> ${l.salary}VND</p>
+                                    <p><strong>Yêu cầu:</strong> ${l.requirements}</p>
+                                    <a href="post_detail?id=${l.postID}" class="btn btn-primary">Chi tiết</a>
                                 </div>
-                            </div><!-- End Service Item -->
+                            </div>
                         </c:forEach>
                     </div>
                 </div>
+            </section>
+            <style>
+                .job-card {
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.2s ease-in-out;
+                }
 
-            </section><!-- /Services Section -->
+                .job-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                }
+
+                .job-card h3 {
+                    font-size: 18px;
+                    color: #333;
+                    margin-bottom: 10px;
+                }
+
+                .job-card p {
+                    font-size: 14px;
+                    color: #666;
+                    margin: 5px 0;
+                }
+
+                .job-card .btn {
+                    display: inline-block;
+                    margin-top: 10px;
+                    padding: 8px 12px;
+                    background: #007bff;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    text-align: center;
+                }
+
+                .job-card .btn:hover {
+                    background: #0056b3;
+                }
+
+            </style>
         </main>
         <%@include file="Footer.jsp" %>
     </body>

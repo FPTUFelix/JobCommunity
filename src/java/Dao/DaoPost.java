@@ -62,7 +62,10 @@ public class DaoPost extends DBContext {
         return l;
     }
 
-    public List<Post> getAllPostActive(String typeName, String dateStarte) {
+    public List<Post> getAllPostActive(String typeName, String dateStarted, String timeDurations, String salaryPara) {
+        // Nếu salaryPara không rỗng, thêm điều kiện lọc Salary
+        String salaryCondition = (salaryPara == null || salaryPara.isEmpty()) ? "" : " AND p.Salary = ? ";
+
         String sql = "SELECT "
                 + "     p.PostID, "
                 + "     p.UserID, "
@@ -80,18 +83,30 @@ public class DaoPost extends DBContext {
                 + " FROM Post p "
                 + " JOIN WorkType w ON p.WorkTypeID = w.WorkTypeID "
                 + " WHERE "
-                + "     (COALESCE(?, '') = '' OR w.TypeName = ?) "
-                + "     AND (COALESCE(?, '') = '' OR p.DateStarted = ?)"
-                + "AND p.Status=1;";
+                + "     (? IS NULL OR w.TypeName = ?) "
+                + "     AND (? IS NULL OR p.DateStarted = ?) "
+                + "     AND (? IS NULL OR p.TimeDuration = ?) "
+                + salaryCondition
+                + "     AND p.Status = 1;";
 
         List<Post> l = new ArrayList<>();
         try {
             connection = new DBContext().connection;
             ps = connection.prepareStatement(sql);
-            ps.setString(1, typeName);
-            ps.setString(2, typeName);
-            ps.setString(3, dateStarte);
-            ps.setString(4, dateStarte);
+
+            int paramIndex = 1;
+            ps.setString(paramIndex++, typeName.isEmpty() ? null : typeName);
+            ps.setString(paramIndex++, typeName.isEmpty() ? null : typeName);
+            ps.setString(paramIndex++, dateStarted.isEmpty() ? null : dateStarted);
+            ps.setString(paramIndex++, dateStarted.isEmpty() ? null : dateStarted);
+            ps.setString(paramIndex++, timeDurations.isEmpty() ? null : timeDurations);
+            ps.setString(paramIndex++, timeDurations.isEmpty() ? null : timeDurations);
+
+            // Nếu salaryPara có giá trị, thêm vào câu truy vấn
+            if (salaryPara != null && !salaryPara.isEmpty()) {
+                ps.setInt(paramIndex++, Integer.parseInt(salaryPara));
+            }
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 int postID = rs.getInt(1);
@@ -99,7 +114,7 @@ public class DaoPost extends DBContext {
                 String title = rs.getString(3);
                 String description = rs.getString(4);
                 String img = rs.getString(5);
-                String dateStarted = rs.getString(6);
+                String dateStartedDB = rs.getString(6);
                 String timeDuration = rs.getString(7);
                 String place = rs.getString(8);
                 int salary = rs.getInt(9);
@@ -108,7 +123,7 @@ public class DaoPost extends DBContext {
                 String workType = rs.getString(12);
                 int status = rs.getInt(13);
 
-                Post p = new Post(postID, userID, title, description, img, dateStarted,
+                Post p = new Post(postID, userID, title, description, img, dateStartedDB,
                         timeDuration, place, salary, paymentTime,
                         requirements, workType, status);
                 l.add(p);
@@ -254,8 +269,8 @@ public class DaoPost extends DBContext {
     }
 
     public static void main(String[] args) {
-        DaoPost dao = new DaoPost();
-        List<Post> l = dao.getAllPostActive("", "");
+        DaoPost d = new DaoPost();
+        List<Post> l = d.getAllPostActive("", "", "", "800000");
         System.out.println(l.isEmpty());
     }
 }

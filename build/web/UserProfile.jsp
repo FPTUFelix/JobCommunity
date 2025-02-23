@@ -75,7 +75,7 @@
                                     <div>
                                         <img src="${User.img}" class="testimonial-img" alt="img">
                                         <h3>${User.userName}</h3>
-                                        <a href="ChangeImageProfile.jsp" class="btn btn-primary btn-sm">Đổi Avatar</a>
+                                        <a href="ChangeImageProfile.jsp" class="btn btn-primary btn-sm">Thay đổi thông tin cá nhân</a>
                                     </div>
                                 </div>
                                 <c:if test="${User.userType == 2}">
@@ -98,6 +98,7 @@
                                             <li><strong>Loại tài khoản:</strong> Chưa xác thực</li>
                                             </c:when>
                                         </c:choose>
+                                    <li><strong>Số điện thoại</strong> ${User.phone}</li>
                                 </ul>
                             </div>
                         </div>

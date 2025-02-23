@@ -101,7 +101,19 @@
 
 
                                             <!-- Nút tải lên -->
-                                            <button class="btn btn-primary btn-sm mt-3" type="submit">Tải lên</button>
+                                            <button class="btn btn-primary btn-sm mt-3" type="submit">Tải lên</button><br>
+                                            <ul>Đăng ký tài khoản vip:</ul> 
+                                            <li>Đăng bài không giới hạn</li>
+                                            <li>Ưu tiên trong mọi công việc </li>
+                                            <ul> Đăng ký ngay chỉ với 39k/1tháng. Các gói đăng ký:</ul>
+                                            <li> 1 tháng 39k </li>
+                                            <li> 2 tháng 109k </li>
+                                            <li> 3 tháng 219k </li>
+                                            <p>Ngân hàng MB Bank </p>
+                                            <p> Chủ tài khoản: Nguyễn Trọng Sơn</p>
+                                            <p>  Mã QR:
+                                            </p>
+                                            <img src="IMG/maQR.jpg" alt="alt"/>
                                         </div>
                                     </div>
                                 </div>

@@ -44,7 +44,7 @@
     </head>
 
     <body class="about-page">
-            <%@include file="Header.jsp" %>
+        <%@include file="Header.jsp" %>
 
         <main class="main">
 
@@ -73,13 +73,21 @@
                         <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
                             <h2 class="inner-title">Job Community - Trang web tìm nhân công/việc làm uy tín</h2>
                             <div class="our-story">
-                                <h4>Bắt đầu hoạt động vào năm 2024</h4>
-                                <h3>Giới thiệu</h3>
-                                <p>Job Community là nơi giúp các bạn tìm nhân công/ việc làm nhanh gọn uy tín tiết kiệm tối đa thời gian chờ. Nơi đây giúp bạn đăng bài kiếm việc hoặc kiếm nhân công cho công việc của bạn</p>
+                                <h3>Giới thiệu:</h3>
+                                <p>Nhân Công Sự Kiện Tối Ưu là nền tảng giúp mọi nhân viên lao động kết nối được với  nhà tuyển dụng một cách trực tiếp.</p>
+                                <h3>Tầm nhìn:</h3>
+                                <p>Trở thành nền tảng kết nối nhân sự sự kiện hàng đầu, giúp mọi người tìm kiếm và tiếp cận công việc nhanh chóng, minh bạch và hiệu quả.
+                                </p>
+                                <h3>Sứ mệnh:</h3>
+                                <p>Cung cấp giải pháp tuyển dụng linh hoạt, trực tiếp giữa nhân sự và nhà tuyển dụng trong ngành sự kiện, tối ưu quy trình làm việc và nâng cao chất lượng nguồn nhân lực cũng như sự kiện.</p>
+                                <h3>Giá trị cốt lõi:</h3>
                                 <ul>
-                                    <li><i class="bi bi-check-circle"></i> <span>Đảm bảo uy tín chất lượng</span></li>
-                                    <li><i class="bi bi-check-circle"></i> <span>Thông tin cập nhật liên tục</span></li>
-                                    <li><i class="bi bi-check-circle"></i> <span>Mô tả công việc đơn giản, dễ hiểu</span></li>
+                                    <li><i class="bi bi-check-circle"></i> <span>Kết nối nhanh chóng – Giúp người lao động và nhà tuyển dụng gặp nhau dễ dàng, không qua trung gian.</span></li>
+                                    <li><i class="bi bi-check-circle"></i> <span>Minh bạch & Công bằng – Tạo môi trường làm việc rõ ràng, công khai, đảm bảo quyền lợi cho cả hai bên.</span></li>
+                                    <li><i class="bi bi-check-circle"></i> <span>Linh hoạt & Hiệu quả – Đáp ứng nhu cầu tuyển dụng theo thời gian thực, tiết kiệm thời gian và chi phí.
+                                        </span></li>
+                                    <li><i class="bi bi-check-circle"></i> <span>Phát triển bền vững – Góp phần nâng cao chất lượng lao động trong ngành sự kiện.
+                                        </span></li>
                                 </ul>
                                 <p>Job Community - Luôn luôn sẵn sàng!</p>
                             </div>
@@ -91,7 +99,7 @@
 
             </section><!-- /About Section -->
         </main>
-            <%@include file="Footer.jsp" %>
+        <%@include file="Footer.jsp" %>
     </body>
 
 </html>

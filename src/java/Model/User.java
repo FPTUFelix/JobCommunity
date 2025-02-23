@@ -15,6 +15,7 @@ public class User {
     private String password;
     private String email;
     private String fullName;
+    private String phone;
     private String img;
     private String userType;
     private String CCCDFront;
@@ -24,12 +25,13 @@ public class User {
     public User() {
     }
 
-    public User(int userID, String userName, String password, String email, String fullName, String img, String userType, String CCCDFront, String CCCDBack, int status) {
+    public User(int userID, String userName, String password, String email, String fullName, String phone, String img, String userType, String CCCDFront, String CCCDBack, int status) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.fullName = fullName;
+        this.phone = phone;
         this.img = img;
         this.userType = userType;
         this.CCCDFront = CCCDFront;
@@ -77,6 +79,14 @@ public class User {
         this.fullName = fullName;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getImg() {
         return img;
     }
@@ -116,4 +126,6 @@ public class User {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    
 }

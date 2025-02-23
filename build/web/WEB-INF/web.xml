@@ -60,6 +60,22 @@
         <servlet-name>InactivePostController</servlet-name>
         <servlet-class>Controller.InactivePostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListUserController</servlet-name>
+        <servlet-class>Controller.ListUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDetailForAdminController</servlet-name>
+        <servlet-class>Controller.UserDetailForAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelUser</servlet-name>
+        <servlet-class>Controller.CancelUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccpetUserController</servlet-name>
+        <servlet-class>Controller.AccpetUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -119,6 +135,22 @@
     <servlet-mapping>
         <servlet-name>InactivePostController</servlet-name>
         <url-pattern>/inactive_post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListUserController</servlet-name>
+        <url-pattern>/list_user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailForAdminController</servlet-name>
+        <url-pattern>/user_detail_for_admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelUser</servlet-name>
+        <url-pattern>/cancel_user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccpetUserController</servlet-name>
+        <url-pattern>/accept_user</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>200</session-timeout>
