@@ -134,7 +134,11 @@
                     </form>
                 </div>
             </section>-->
-
+            <c:if test="${empty listPostByUserID}">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                    <p class="text-muted fs-5">Bạn chưa đăng bài nào!</p>
+                </div>
+            </c:if>
             <!-- Danh sách bài viết -->
             <section id="blog-posts" class="blog-posts section">
                 <div class="container">
