@@ -16,7 +16,7 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
+        <link href="/IMG/Logo.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Fonts -->
@@ -56,27 +56,25 @@
                     <div class="carousel-item active">
                         <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="">
                         <div class="container">
-                            <h2>Tìm Việc/Nhân Công Nhanh Chóng - Hiệu Quả - Uy Tín</h2>
-                            <p>Chào Mừng các bạn đến với hệ thống Job Community của chúng tôi.</p>
-                            <a href="about.html" class="btn-get-started">Read More</a>
+                            <h2>Đáp ứng đầy đủ nhu cầu từ nhà tuyển dụng </h2>
+                            <a href="Introduction.jsp" class="btn-get-started">Xem thêm</a>
                         </div>
                     </div><!-- End Carousel Item -->
 
                     <div class="carousel-item">
                         <img src="assets/img/hero-carousel/hero-carousel-2.jpg" alt="">
                         <div class="container">
-                            <h2>Tìm Việc/Nhân Công Nhanh Chóng - Hiệu Quả - Uy Tín</h2>
-                            <p>Chào Mừng các bạn đến với hệ thống Job Community của chúng tôi.</p>
-                            <a href="about.html" class="btn-get-started">Read More</a>
+                            <h2>Đảm bảo lợi ích tuyệt đối cho người đi làm </h2>
+                            <a href="Introduction.jsp" class="btn-get-started">Xem thêm</a>
                         </div>
                     </div><!-- End Carousel Item -->
 
                     <div class="carousel-item">
                         <img src="assets/img/hero-carousel/hero-carousel-3.jpg" alt="">
                         <div class="container">
-                            <h2>Tìm Việc/Nhân Công Nhanh Chóng - Hiệu Quả - Uy Tín</h2>
-                            <p>Chào Mừng các bạn đến với hệ thống Job Community của chúng tôi.</p>
-                            <a href="about.html" class="btn-get-started">Read More</a>
+                            <h2>Tối ưu về mọi mặt, đảm bảo chất lượng sự kiện
+                            </h2>
+                            <a href="Introduction.jsp" class="btn-get-started">Xem thêm</a>
                         </div>
                     </div><!-- End Carousel Item -->
 

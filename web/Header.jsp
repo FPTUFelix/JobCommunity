@@ -14,8 +14,8 @@
         <meta name="keywords" content="">
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="/IMG/Logo.png" rel="icon">
+        <link href="/IMG/Logo.png" rel="apple-touch-icon">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -46,8 +46,8 @@
         <header id="header" class="header d-flex align-items-center sticky-top">
             <div class="container position-relative d-flex align-items-center">
                 <a href="Home.jsp" class="logo d-flex align-items-center me-auto">
-                    <img src="assets/img/logo.png" alt="">
-                    <h1 class="sitename">Company</h1><span>.</span>
+                    <img src="IMG/Logo.png" alt="">
+                    <h1 class="sitename">Nhân Công Sự Kiện</h1>
                 </a>
 
                 <nav id="navmenu" class="navmenu">
@@ -55,7 +55,7 @@
                         <li><a href="home" class="active">Trang chủ</a></li>
                         <li><a href="Introduction.jsp">Giới thiệu</a></li>
                         <li><a href="list_post_controller">Bài Đăng</a></li>
-                        <li><a href="list_user_message">Nhắn tin</a></li>
+<!--                        <li><a href="list_user_message">Nhắn tin</a></li>-->
                         <li><a href="list_post_by_user?userID=${sessionScope.user.userID}">Bài đăng của tôi</a></li>
                         <!-- Kiểm tra nếu đã đăng nhập thì hiển thị dropdown -->
                         <c:if test="${not empty sessionScope.user}">
@@ -75,8 +75,8 @@
                 </nav>
 
                 <div class="header-social-links">
-                    <a href="https://www.facebook.com/tung.gia.9277/?locale=vi_VN" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="https://www.tiktok.com/@_fptu_felix_" class="twitter"><i class="bi bi-tiktok"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61571828608133" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.tiktok.com/@nhancongtoiuu?_t=ZS-8u90jLgq45X&_r=1" class="twitter"><i class="bi bi-tiktok"></i></a>
                 </div>
 
                 <!-- Nếu chưa đăng nhập, hiển thị nút đăng nhập -->
