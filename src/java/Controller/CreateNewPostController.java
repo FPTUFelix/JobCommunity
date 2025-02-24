@@ -81,7 +81,7 @@ public class CreateNewPostController extends HttpServlet {
                 if (daoPost.checkAvaliblePost(userID) == false && daoUser.checkUserVip(userID) == false) {
                     request.setAttribute("mess", "Bạn đã hết lượt đăng bài free hãy xác thực để đăng thêm!");
                 } else {
-                    daoPost.createNewPost(userID, workType, title, description, imgPath, dateStarted, timeDuration, place, salary, paymentTime, requirement, salary);
+                    daoPost.createNewPost(userID, workType, title, description, imgPath, dateStarted, timeDuration, place, salary, paymentTime, requirement, 1);
                     response.sendRedirect("list_post_controller");
                 }
             }
